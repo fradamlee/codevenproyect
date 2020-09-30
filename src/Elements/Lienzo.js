@@ -1,11 +1,18 @@
 import React from "react";
 import MainUserCode from "../UserCode/main"
+import "./Rep_obj_prueba";
 
 
-var clickPress; // Está variable es true mientras el usuario da un clic sostenido sobre el lienzo
+// var clickPress; // Está variable es true mientras el usuario da un clic sostenido sobre el lienzo
+var scrollWindow = 0;
 // Estas son las variables que determinan la pocición en coordenadas del mouse
 
+window.addEventListener("scroll", ScrollWindow);
 
+function ScrollWindow(evt) {
+    console.log(evt.target.scrollingElement.scrollTop);
+    scrollWindow = evt.target.scrollingElement.scrollTop
+}
 
 class Lienzo extends React.Component {
 
@@ -16,8 +23,8 @@ class Lienzo extends React.Component {
             x: 500,
             y: 300,
             pack: props.pack,
+            clickPress: props.clickPress,
             scroll: 0,
-
         }
     }
 
@@ -34,21 +41,20 @@ class Lienzo extends React.Component {
         eventos.persist();
         this.setState({
             scroll: eventos.target.scrollTop,
-
         })
     }
 
     // Este metodo actualiza el valor de x, y, cada que el usuario da clic sostenido
     PressMouse = (evt) => {
-        if (clickPress) {
+        if (this.state.clickPress) {
             this.setState({
                 // if (clickPress) {
                 x: - evt.clientX + 650,
-                y: evt.clientY - 234 + this.state.scroll,
+                y: evt.clientY - 234 + this.state.scroll + scrollWindow,
                 // }
             })
             console.log("x: " + this.state.x, " y: " + this.state.y);
-            console.log("Component: " + this.state.pack[0] + " JSON " + this.state.pack[1] + " archivo " + this.state.pack[2]);
+            console.log("Component: " + this.state.pack[0] + " JSON " + this.state.pack[1][1] + " archivo " + this.state.pack[2]);
         }
     }
 
@@ -66,9 +72,9 @@ class Lienzo extends React.Component {
             {/* Esta es la interfaz del lienzo */}
             <div
                 // Estos son los eventos del mouse a los que responde
-                onMouseDown={() => { clickPress = true }}
+                onMouseDown={() => { this.state.clickPress = true }}
                 onMouseMove={this.PressMouse}
-                onMouseUp={() => { clickPress = false }}
+                onMouseUp={() => { this.state.clickPress = false }}
                 onScroll={this.HacerScroll}
                 // Estos son los estilos del cuadro del Lienzo
                 style={{
