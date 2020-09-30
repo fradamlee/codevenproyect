@@ -6,7 +6,7 @@ var clickPress; // Está variable es true mientras el usuario da un clic sosteni
 // Estas son las variables que determinan la pocición en coordenadas del mouse
 var x;
 var y;
-
+var totalY;
 
 class Lienzo extends React.Component {
 
@@ -16,6 +16,8 @@ class Lienzo extends React.Component {
         this.state = {
             x: 500,
             y: 300,
+            currentY: 300,
+            totalY: 300,
             pack: props.pack
         }
     }
@@ -38,6 +40,7 @@ class Lienzo extends React.Component {
             })
             console.log("x: " + this.state.x, " y: " + this.state.y);
             console.log("Component: " + this.state.pack[0] + " JSON " + this.state.pack[1] + " archivo " + this.state.pack[2]);
+            this.Union();
         }
     }
 
@@ -45,14 +48,25 @@ class Lienzo extends React.Component {
         // console.log(eventos.target);
         console.log(eventos.target.scrollTop);
         eventos.persist();
-        // this.setState({
-        //     y: this.state.y + scrollDiferencia
-        // })
+        this.setState({
+            currentY: this.state.y + eventos.target.scrollTop
+        })
         console.log(this.state.y);
     }
 
+    Union = () => {
+        if (this.state.currentY == this.state.y) {
+            this.setState({
+                totalY: this.state.y
+            })
+        } else {
+            this.setState({
+                totalY: this.state.currentY
+            })
+        }
+    }
+
     render() {
-        var conservate = this.state.y
 
         // function PressMouse(evt) {
         //     if (clickPress) {
@@ -91,8 +105,8 @@ class Lienzo extends React.Component {
                     Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h3>
 
                 {/* Esto es el cuadro que representa un elemento siendo arrastrado al interior del lienzo     */}
-                <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y - 100, right: this.state.x - 100, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1> <h3>{conservate}</h3></div>
-                <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.y, right: this.state.x }}><h1> </h1></div>
+                <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y - 100, right: this.state.x - 100, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1></div>
+                <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.totalY, right: this.state.x }}><h1> </h1></div>
             </div>
 
             {/* Este es el src del MainUserCode en js, sin embargo hasta ahora no ha funcionado cuando este contiene un innerHTML */}
