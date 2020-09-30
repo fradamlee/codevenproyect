@@ -1,5 +1,6 @@
 import React from "react";
 import MainUserCode from "../UserCode/main"
+import InfoObjetoPrueba from "./Info_obj_prueba";
 import "./Rep_obj_prueba";
 
 
@@ -10,12 +11,11 @@ var scrollWindow = 0;
 window.addEventListener("scroll", ScrollWindow);
 
 function ScrollWindow(evt) {
-    console.log(evt.target.scrollingElement.scrollTop);
+    // console.log(evt.target.scrollingElement.scrollTop);
     scrollWindow = evt.target.scrollingElement.scrollTop
 }
 
 class Lienzo extends React.Component {
-
     //Por el momento no recibe ninguna props desde el constructor base
     constructor(props) {
         super(props)
@@ -25,12 +25,13 @@ class Lienzo extends React.Component {
             pack: props.pack,
             clickPress: props.clickPress,
             scroll: 0,
+            infoLienzo: []
         }
     }
 
     componentWillReceiveProps = (newProps) => {
-        console.log(newProps.pack);
-        console.log(newProps.clickPress);
+        // console.log(newProps.pack);
+        // console.log(newProps.clickPress);
         this.setState({
             clickPress: newProps.clickPress,
             pack: newProps.pack,
@@ -38,8 +39,7 @@ class Lienzo extends React.Component {
     }
 
     HacerScroll = (eventos) => {
-        // console.log(eventos.target);
-        console.log(eventos.target.scrollTop);
+        // console.log(eventos.target.scrollTop);
         eventos.persist();
         this.setState({
             scroll: eventos.target.scrollTop,
@@ -47,7 +47,7 @@ class Lienzo extends React.Component {
     }
 
     // Este metodo actualiza el valor de x, y, cada que el usuario da clic sostenido
-    PressMouse = (evt) => {
+    ArrastrarAlLienzo = (evt) => {
         if (this.state.clickPress) {
             this.setState({
                 // if (clickPress) {
@@ -55,9 +55,17 @@ class Lienzo extends React.Component {
                 y: evt.clientY - 234 + this.state.scroll + scrollWindow,
                 // }
             })
-            console.log("x: " + this.state.x, " y: " + this.state.y);
-            console.log("Component: " + this.state.pack[0] + " JSON " + this.state.pack[1][1] + " archivo " + this.state.pack[2]);
+            // console.log("x: " + this.state.x, " y: " + this.state.y);
+            // console.log("Component: " + this.state.pack[0] + " JSON " + this.state.pack[1][1] + " archivo " + this.state.pack[2]);
         }
+    }
+
+    ColocarEnLienzo = () => {
+        this.setState({
+            infoLienzo: [this.state.x, this.state.y, this.state.pack],
+            clickPress: false
+        })
+
     }
 
     render() {
@@ -74,9 +82,10 @@ class Lienzo extends React.Component {
             {/* Esta es la interfaz del lienzo */}
             <div
                 // Estos son los eventos del mouse a los que responde
-                onMouseDown={() => { this.state.clickPress = true }}
-                onMouseMove={this.PressMouse}
-                onMouseUp={() => { this.state.clickPress = false }}
+
+                // onMouseDown={() => { this.state.clickPress = true }}
+                onMouseMove={this.ArrastrarAlLienzo}
+                onMouseUp={this.ColocarEnLienzo}
                 onScroll={this.HacerScroll}
                 // Estos son los estilos del cuadro del Lienzo
                 style={{
@@ -103,11 +112,10 @@ class Lienzo extends React.Component {
                 <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.y, right: this.state.x }}><h1> </h1></div>
             </div>
 
+            <InfoObjetoPrueba infoLienzo={this.state.infoLienzo} />
             {/* Este es el src del MainUserCode en js, sin embargo hasta ahora no ha funcionado cuando este contiene un innerHTML */}
             <script src={MainUserCode}></script>
         </div>);
-
-
     }
 }
 
