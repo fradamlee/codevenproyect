@@ -7,17 +7,24 @@ var clickPress; // Está variable es true mientras el usuario da un clic sosteni
 var x;
 var y;
 
+
 class Lienzo extends React.Component {
 
     //Por el momento no recibe ninguna props desde el constructor base
     constructor(props) {
         super(props)
         this.state = {
-            x: 0,
-            y: 0,
+            x: 500,
+            y: 300,
             pack: props.pack
-
         }
+    }
+
+    componentWillReceiveProps = (newProps) => {
+        console.log(newProps.pack);
+        this.setState({
+            pack: newProps.pack,
+        })
     }
 
     // Este metodo actualiza el valor de x, y, cada que el usuario da clic sostenido
@@ -25,8 +32,8 @@ class Lienzo extends React.Component {
         if (clickPress) {
             this.setState({
                 // if (clickPress) {
-                x: - evt.clientX + 500,
-                y: evt.clientY - 300,
+                x: - evt.clientX + 650,
+                y: evt.clientY - 234,
                 // }
             })
             console.log("x: " + this.state.x, " y: " + this.state.y);
@@ -34,7 +41,18 @@ class Lienzo extends React.Component {
         }
     }
 
+    HacerScroll = (eventos) => {
+        // console.log(eventos.target);
+        console.log(eventos.target.scrollTop);
+        eventos.persist();
+        // this.setState({
+        //     y: this.state.y + scrollDiferencia
+        // })
+        console.log(this.state.y);
+    }
+
     render() {
+        var conservate = this.state.y
 
         // function PressMouse(evt) {
         //     if (clickPress) {
@@ -51,6 +69,7 @@ class Lienzo extends React.Component {
                 onMouseDown={() => { clickPress = true }}
                 onMouseMove={this.PressMouse}
                 onMouseUp={() => { clickPress = false }}
+                onScroll={this.HacerScroll}
                 // Estos son los estilos del cuadro del Lienzo
                 style={{
                     width: 650,
@@ -72,7 +91,8 @@ class Lienzo extends React.Component {
                     Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</h3>
 
                 {/* Esto es el cuadro que representa un elemento siendo arrastrado al interior del lienzo     */}
-                <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y, right: this.state.x, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1></div>
+                <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y - 100, right: this.state.x - 100, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1> <h3>{conservate}</h3></div>
+                <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.y, right: this.state.x }}><h1> </h1></div>
             </div>
 
             {/* Este es el src del MainUserCode en js, sin embargo hasta ahora no ha funcionado cuando este contiene un innerHTML */}

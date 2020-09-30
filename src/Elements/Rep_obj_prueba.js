@@ -2,8 +2,6 @@ import React from "react";
 import "./Lienzo";
 import Lienzo from "./Lienzo";
 
-var pack;
-
 class RepObjPrueba extends React.Component {
     constructor(props) {
         super(props)
@@ -11,6 +9,7 @@ class RepObjPrueba extends React.Component {
             pack: ["v", "b", "c"]
         }
     }
+
 
     Change = () => {
         this.setState({
