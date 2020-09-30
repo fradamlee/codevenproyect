@@ -18,40 +18,52 @@ class RepObjPrueba extends React.Component {
             pack: ["Boton",
                 [
                     "boton4",
-                    100,
                     30,
+                    100,
                     true,
-                    "print('evento')"
+                    "console.log('evento')",
+                    "000000",
                 ]
                 , "boton.js"],
-        })
+        },
+        )
+        this.state.clickPress = true
     }
 
     ChangeImagen = () => {
         this.setState({
-            pack: ["Boton",
+            pack: ["Imagen",
                 [
-                    "boton4",
-                    100,
-                    30,
+                    "imagen3",
+                    170,
+                    200,
                     true,
-                    "print('evento')"
+                    "",
+                    "https://images.app.goo.gl/JhLe5WTJotxGBXvF9"
                 ]
                 , "boton.js"],
+        },
+        );
+        this.setState({
+            clickPress: true
         })
     }
 
     ChangeTexto = () => {
         this.setState({
-            pack: ["Boton",
+            pack: ["Texto",
                 [
-                    "boton4",
-                    100,
-                    30,
+                    "texto7",
+                    50,
+                    120,
                     true,
-                    "print('evento')"
+                    "",
+                    "Eso es un texto"
                 ]
-                , "boton.js"],
+                , "texto.js"],
+        });
+        this.setState({
+            clickPress: true
         })
     }
 
@@ -59,11 +71,12 @@ class RepObjPrueba extends React.Component {
 
         return (<div>
             <h1>Lienzo</h1>
-            <button onMouseDown={this.ChangeBoton, this.state.clickPress = true}>Boton</button>
-            <button onMouseDown={this.ChangeImagen, this.state.clickPress = true}>Imagen</button>
-            <button onMouseDown={this.ChangeTexto, this.state.clickPress = true}>Texto</button>
+            <button onMouseDown={this.ChangeBoton}>Boton</button>
+            <button onMouseDown={this.ChangeImagen}>Imagen</button>
+            <button onMouseDown={this.ChangeTexto}>Texto</button>
             <h2>{this.state.pack}</h2>
-            <Lienzo pack={this.state.pack} clickPress={this.state.clickPress = false} />
+            <h1>{this.state.clickPress}</h1>
+            <Lienzo pack={this.state.pack} clickPress={this.state.clickPress} />
             {/* <Lienzo className="Boton" JSON="JSON" archivo="archivo" /> */}
 
         </div>)

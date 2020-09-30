@@ -30,7 +30,9 @@ class Lienzo extends React.Component {
 
     componentWillReceiveProps = (newProps) => {
         console.log(newProps.pack);
+        console.log(newProps.clickPress);
         this.setState({
+            clickPress: newProps.clickPress,
             pack: newProps.pack,
         })
     }
