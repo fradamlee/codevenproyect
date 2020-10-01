@@ -35,8 +35,8 @@ class RepObjPrueba extends React.Component {
             pack: ["Imagen",
                 [
                     "imagen3",
-                    170,
-                    200,
+                    250,
+                    350,
                     true,
                     "",
                     "https://images.app.goo.gl/JhLe5WTJotxGBXvF9"
@@ -55,7 +55,7 @@ class RepObjPrueba extends React.Component {
                 [
                     "texto7",
                     50,
-                    120,
+                    300,
                     true,
                     "",
                     "Eso es un texto"

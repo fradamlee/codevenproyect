@@ -4,12 +4,17 @@ class InfoObjetoPrueba extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            info: props.infoLienzo
+            info: props.infoLienzo,
+            showInfo: props.showInfo,
+
         }
     }
 
     componentWillReceiveProps = (newProps) => {
-        console.log(newProps.infoLienzo);
+        if (newProps.showInfo) {
+            console.log(newProps.infoLienzo);
+        }
+
     }
 
     render() {
