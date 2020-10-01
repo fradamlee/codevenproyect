@@ -92,6 +92,7 @@ class Lienzo extends React.Component {
                     position: "relative",
                     overflowY: "scroll",
                     border: "solid 1px",
+
                     borderColor: "#D5D5D5"
                 }}>
 
