@@ -161,23 +161,24 @@ class Lienzo extends React.Component {
 
                 {/* Esto es el cuadro que representa un elemento siendo arrastrado al interior del lienzo     */}
 <<<<<<< HEAD
-                <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y - 100, right: this.state.x - 100, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1></div>
-                <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.totalY, right: this.state.x }}><h1> </h1></div>
+            <div style={{ height: 300, width: 300, background: "aqua", position: "absolute", top: this.state.y - 100, right: this.state.x - 100, opacity: 0.4 }}><h1> {this.state.pack[0] + this.state.pack[1] + this.state.pack[2]} </h1></div>
+            <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.totalY, right: this.state.x }}><h1> </h1></div>
 =======
                 <div style={{ height: this.state.pack[1][1], width: this.state.pack[1][2], background: "aqua", position: "absolute", display: "table-cell", verticalAlign: "middle", top: this.state.y - (this.state.pack[1][1] / 2), right: this.state.x - (this.state.pack[1][2] / 2), opacity: 0.4 }}><h1> </h1> </div>
-                <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.y, right: this.state.x }}><h1> </h1></div>
+            <div style={{ height: 5, width: 5, background: "red", position: "absolute", top: this.state.y, right: this.state.x }}><h1> </h1></div>
 >>>>>>> 977c3f2
-            </div>
+        </div>
 
-            {/* Está es una prueba de como enviaría los datos requeridos a traves del state */}
-            <InfoObjetoPrueba infoLienzo={this.state.infoLienzo} showInfo={this.state.showInfo} />
+            {/* Está es una prueba de como enviaría los datos requeridos a traves del state */ }
+        <InfoObjetoPrueba infoLienzo={this.state.infoLienzo} showInfo={this.state.showInfo} />
 
-            {/* Este es el src del MainUserCode en js, sin embargo hasta ahora no ha funcionado cuando este contiene un innerHTML */}
-            <script src={MainUserCode}></script>
+        {/* Este es el src del MainUserCode en js, sin embargo hasta ahora no ha funcionado cuando este contiene un innerHTML */ }
+        <script src={MainUserCode}></script>
 
-            {/* Se actualizan variables originales al cierre */}
-            <script>{this.state.showInfo = false /* mouseup = false*/}</script>
-        </div>);
+        {/* Se actualizan variables originales al cierre */ }
+        <script>{this.state.showInfo = false /* mouseup = false*/}</script>
+        <h1></h1>
+        </div >);
     }
 }
 
