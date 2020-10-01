@@ -141,7 +141,7 @@ class Lienzo extends React.Component {
                 onScroll={this.HacerScroll}
                 // Estos son los estilos del cuadro del Lienzo
                 style={{
-                    width: 650.1 + ancho,
+                    width: 650 + ancho,
                     height: 800,
                     background: "#FCFCFF",
                     position: "relative",
